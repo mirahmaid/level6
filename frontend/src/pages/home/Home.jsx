@@ -5,41 +5,64 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
-import { useGetproductByNameQuery } from '../../Redux/productApi'
-
-const receviedDateFromAPI = [{}, {}, {}, {}];
+import { useGetproductByNameQuery } from "../../Redux/productApi";
 
 const Home = () => {
-    const { data, error, isLoading } = useGetproductByNameQuery()
-    console.log(data)
+  const { data, error, isLoading } = useGetproductByNameQuery();
   const theme = useTheme();
+
+  console.log(data);
+
+  if (isLoading) {
+    return <Typography>Loading...</Typography>;
+  }
+
+  if (error) {
+    return <Typography>Error loading products</Typography>;
+  }
 
   return (
     <Stack
-      direction={"row"}
-      sx={{ flexWrap: "wrap", justifyContent: "center" }}
+      direction="row"
+      sx={{
+        flexWrap: "wrap",
+        justifyContent: "center",
+      }}
     >
-      {receviedDateFromAPI.map((item) => {
+      {data?.map((item) => {
         return (
-          <Card sx={{ maxWidth: 277, mb: 6, mx: 2 }}>
+          <Card
+            className="card"
+            key={item.id}
+            sx={{
+              maxWidth: 277,
+              mb: 6,
+              mx: 2,
+            }}
+          >
             <CardMedia
               component="img"
-              height="194"
-              image="https://images.pexels.com/photos/18488300/pexels-photo-18488300.jpeg?auto=compress&cs=tinysrgb&w=800"
-              alt="Paella dish"
+              height="277"
+              image={item.imageLink}
+              alt="Product"
             />
+
             <CardContent>
               <Typography variant="body2" color="text.secondary">
-                This impressive paella is a perfect party dish and a fun meal to
-                cook together with your guests.
+                {item.description}
               </Typography>
             </CardContent>
+
             <CardActions
               sx={{ justifyContent: "space-between" }}
               disableSpacing
             >
               <Button
-                sx={{ textTransform: "capitalize", p: 1, lineHeight: 1.1 }}
+                sx={{
+                  textTransform: "capitalize",
+                  p: 1,
+                  lineHeight: 1.1,
+                }}
                 variant="contained"
                 color="primary"
               >
@@ -51,7 +74,7 @@ const Home = () => {
                 variant="body1"
                 color={theme.palette.error.light}
               >
-                $100
+                ${item.price}
               </Typography>
             </CardActions>
           </Card>

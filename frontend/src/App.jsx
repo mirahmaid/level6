@@ -8,6 +8,8 @@ import {
 } from "react-router-dom";
 import Cart from "./pages/Cart/Cart";
 import NotFound from "./NotFound";
+import { Provider } from "react-redux";
+import { store } from "./Redux/store";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -15,12 +17,16 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path="cart" element={<Cart />} />
       <Route path="*" element={<NotFound />} />
-    </Route>
-  )
+    </Route>,
+  ),
 );
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
+  );
 }
 
 export default App;

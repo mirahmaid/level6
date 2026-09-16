@@ -5,9 +5,13 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
+import { useGetproductByNameQuery } from '../../Redux/productApi'
+
 const receviedDateFromAPI = [{}, {}, {}, {}];
 
 const Home = () => {
+    const { data, error, isLoading } = useGetproductByNameQuery()
+    console.log(data)
   const theme = useTheme();
 
   return (
@@ -15,7 +19,6 @@ const Home = () => {
       direction={"row"}
       sx={{ flexWrap: "wrap", justifyContent: "center" }}
     >
-      
       {receviedDateFromAPI.map((item) => {
         return (
           <Card sx={{ maxWidth: 277, mb: 6, mx: 2 }}>

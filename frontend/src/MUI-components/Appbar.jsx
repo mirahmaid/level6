@@ -40,7 +40,7 @@ const Appbar = ({ drawerWidth, showDrawer }) => {
         </Link>
 
         <Typography mr={2} variant="body1" color="inherit">
-          Malak Sharar
+          Mira hmaid
         </Typography>
 
         <Avatar alt="Remy Sharp" src="./images/user3.webp" />

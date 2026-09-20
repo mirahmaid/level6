@@ -6,8 +6,10 @@ import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import { useGetproductByNameQuery } from "../../Redux/productApi";
-
+import { useDispatch } from 'react-redux'
+import { addProduct } from "../../Redux/cartSlice";
 const Home = () => {
+    const dispatch = useDispatch()
   const { data, error, isLoading } = useGetproductByNameQuery();
   const theme = useTheme();
 
@@ -65,6 +67,10 @@ const Home = () => {
                 }}
                 variant="contained"
                 color="primary"
+                 onClick={() => {
+                  dispatch(addProduct(item))
+                }
+                }
               >
                 Add to cart
               </Button>

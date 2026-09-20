@@ -13,6 +13,8 @@ import {
 import "./Cart.css";
 import { Add, Delete, Remove } from "@mui/icons-material";
 import { useSelector, useDispatch } from "react-redux";
+import { decreaseQuantity, deleteProdeuct, increaseQuantity } from "../../Redux/cartSlice";
+
 
 // @ts-ignore
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -44,7 +46,7 @@ const Cart = () => {
             <div style={{ display: "flex", alignItems: "center" }}>
               <IconButton
                 sx={{ color: "#1976d2", ml: "10px" }}
-                onClick={() => {}}
+                onClick={() => {dispatch(increaseQuantity(item))}}
               >
                 <Add />
               </IconButton>
@@ -53,7 +55,7 @@ const Cart = () => {
 
               <IconButton
                 sx={{ color: "#1976d2", mr: "10px" }}
-                onClick={() => {}}
+               onClick={() => {dispatch(decreaseQuantity(item))}}
               >
                 <Remove />
               </IconButton>
@@ -65,6 +67,10 @@ const Cart = () => {
               sx={{ display: { xs: "none", md: "inline-flex" } }}
               variant="text"
               color="error"
+                onClick={() => {
+            dispatch(deleteProdeuct(item))
+          }
+          }
             >
               delete
             </Button>

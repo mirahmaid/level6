@@ -1,5 +1,5 @@
 import "./Home.css";
-import { Typography, Button, Stack } from "@mui/material";
+import { Typography, Button, Stack ,  IconButton, styled,Badge} from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
@@ -8,10 +8,19 @@ import CardActions from "@mui/material/CardActions";
 import { useGetproductByNameQuery } from "../../Redux/productApi";
 import { useDispatch } from 'react-redux'
 import { addProduct } from "../../Redux/cartSlice";
+import { Add, Remove } from "@mui/icons-material";
+import { decreaseQuantity, increaseQuantity } from "../../Redux/cartSlice";
+
 const Home = () => {
     const dispatch = useDispatch()
   const { data, error, isLoading } = useGetproductByNameQuery();
   const theme = useTheme();
+const StyledBadge = styled(Badge)(({ theme }) => ({
+  "& .MuiBadge-badge": {
+    backgroundColor: "#1976d2",
+    color: "#fff",
+  },
+}));
 
   console.log(data);
 
@@ -59,7 +68,23 @@ const Home = () => {
               sx={{ justifyContent: "space-between" }}
               disableSpacing
             >
-              <Button
+           {false? (<div dir = "rtl"style={{ display: "flex", alignItems: "center" }}>
+              <IconButton color="primary"
+                sx={{ color: "#1976d2", ml: "10px" }}
+                onClick={() => {dispatch(increaseQuantity(item))}}
+              >
+                <Add fontSize="small"/>
+              </IconButton>
+
+              <StyledBadge badgeContent={item.quantity} color="primary" />
+
+              <IconButton color="primary"
+                sx={{ color: "#1976d2", mr: "10px" }}
+               onClick={() => {dispatch(decreaseQuantity(item))}}
+              >
+                <Remove fontSize="small"/>
+              </IconButton>
+            </div>) : (    <Button
                 sx={{
                   textTransform: "capitalize",
                   p: 1,
@@ -73,8 +98,9 @@ const Home = () => {
                 }
               >
                 Add to cart
-              </Button>
-
+              </Button>)}
+          
+   
               <Typography
                 mr={1}
                 variant="body1"

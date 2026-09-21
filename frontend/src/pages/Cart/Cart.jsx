@@ -26,7 +26,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 const Cart = () => {
   const { selectedProducts } = useSelector((state) => state.cartt);
-
+const dispatch = useDispatch();
   console.log(selectedProducts);
 
   return (

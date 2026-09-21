@@ -12,6 +12,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import { useSelector} from "react-redux";
 
 import {
   Brightness4,
@@ -39,6 +40,7 @@ const Drawerr = ({
   hideDrawer,
 }) => {
   const currentLocation = useLocation();
+  const { selectedProducts } = useSelector((state) => state.cartt);
 
   const navigate = useNavigate();
   const theme = useTheme();
@@ -48,7 +50,7 @@ const Drawerr = ({
     {
       text: "Cart",
       icon: (
-        <StyledBadge badgeContent={3} color="secondary">
+        <StyledBadge badgeContent={selectedProducts.length} color="secondary">
           <ShoppingCart />
         </StyledBadge>
       ),

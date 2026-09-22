@@ -2,9 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   selectedProducts: [
-   
-   
+  
   ],
+   selectedProductsID: [],
 };
 
 export const counterSlice = createSlice({
@@ -16,6 +16,8 @@ export const counterSlice = createSlice({
       const productandQuantity = {...action.payload,"quantity": 1}
       state.selectedProducts.push(productandQuantity)
       console.log("done")
+      state.selectedProductsID.push(action.payload.id)
+
     },
     increaseQuantity: (state, action) => {
       // state.value += action.payload;

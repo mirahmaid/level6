@@ -6,12 +6,13 @@ import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import { useGetproductByNameQuery } from "../../Redux/productApi";
-import { useDispatch } from 'react-redux'
+import { useDispatch , useSelector } from 'react-redux'
 import { addProduct } from "../../Redux/cartSlice";
 import { Add, Remove } from "@mui/icons-material";
 import { decreaseQuantity, increaseQuantity } from "../../Redux/cartSlice";
 
 const Home = () => {
+   const {selectedProducts, selectedProductsID} = useSelector((state) => state.cartt)
     const dispatch = useDispatch()
   const { data, error, isLoading } = useGetproductByNameQuery();
   const theme = useTheme();
@@ -40,7 +41,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
         justifyContent: "center",
       }}
     >
-      {data?.map((item) => {
+      {data?.map((item,index) => {
         return (
           <Card
             className="card"
@@ -68,7 +69,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
               sx={{ justifyContent: "space-between" }}
               disableSpacing
             >
-           {false? (<div dir = "rtl"style={{ display: "flex", alignItems: "center" }}>
+           {selectedProductsID.includes(item.id)? (<div dir = "rtl"style={{ display: "flex", alignItems: "center" }}>
               <IconButton color="primary"
                 sx={{ color: "#1976d2", ml: "10px" }}
                 onClick={() => {dispatch(increaseQuantity(item))}}
@@ -76,7 +77,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
                 <Add fontSize="small"/>
               </IconButton>
 
-              <StyledBadge badgeContent={item.quantity} color="primary" />
+              <StyledBadge badgeContent={selectedProducts[index].quantity} color="primary" />
 
               <IconButton color="primary"
                 sx={{ color: "#1976d2", mr: "10px" }}

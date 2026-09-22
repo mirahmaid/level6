@@ -37,12 +37,19 @@ export const counterSlice = createSlice({
       )
       decreaseProduct.quantity -= 1;
       if (decreaseProduct.quantity === 0) {
-        const newArr = state.selectedProducts.filter((item) => {
-          return item.id !== action.payload.id
+         const newArr = state.selectedProducts.filter((item) => {
+          return item.id !==action.payload.id;
+          
+        }
+        )
+         const newArr2 = state.selectedProductsID.filter((item) => {
+          return item !==action.payload.id;
           
         }
         )
         state.selectedProducts =newArr ;
+        state.selectedProductsID =newArr2 ;
+
       }
       console.log("done")
     },

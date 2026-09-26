@@ -10,6 +10,7 @@ import { useDispatch , useSelector } from 'react-redux'
 import { addProduct } from "../../Redux/cartSlice";
 import { Add, Remove } from "@mui/icons-material";
 import { decreaseQuantity, increaseQuantity } from "../../Redux/cartSlice";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
 

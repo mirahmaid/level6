@@ -26,7 +26,9 @@ export const counterSlice = createSlice({
       return item.id === action.payload.id  
       }
       )
+      localStorage.setItem("selectproductsID",JSON.stringify(state.selectedProductsID))
       increaseProduct.quantity += 1;
+      localStorage.setItem("selectproducts",JSON.stringify(state.selectedProducts))
       console.log("done")
     },
       decreaseQuantity: (state, action) => {
@@ -37,6 +39,8 @@ export const counterSlice = createSlice({
       }
       )
       decreaseProduct.quantity -= 1;
+      localStorage.setItem("selectproducts",JSON.stringify(state.selectedProducts))
+      localStorage.setItem("selectproductsID",JSON.stringify(state.selectedProductsID))
       if (decreaseProduct.quantity === 0) {
          const newArr = state.selectedProducts.filter((item) => {
           return item.id !==action.payload.id;
@@ -62,6 +66,14 @@ export const counterSlice = createSlice({
       }
       )
       state.selectedProducts = newArr;
+        localStorage.setItem(
+        "selectproducts",
+        JSON.stringify(state.selectedProducts),
+      );
+      localStorage.setItem(
+        "selectproductsID",
+        JSON.stringify(state.selectedProductsID),
+      );
       console.log("done")
     },
   },

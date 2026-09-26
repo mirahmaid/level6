@@ -12,8 +12,10 @@ import { Add, Remove } from "@mui/icons-material";
 import { decreaseQuantity, increaseQuantity } from "../../Redux/cartSlice";
 
 const Home = () => {
-   const {selectedProducts, selectedProductsID} = useSelector((state) => state.cartt)
-    const dispatch = useDispatch()
+
+  const {selectedProducts, selectedProductsID} = useSelector((state) => state.cartt)
+   const navigate = useNavigate();
+  const dispatch = useDispatch()
   const { data, error, isLoading } = useGetproductByNameQuery();
   const theme = useTheme();
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -63,6 +65,10 @@ return myProduct.quantity
               height="277"
               image={item.imageLink}
               alt="Product"
+               onClick={() => {
+                navigate(`Product-Details/${item.id}`)
+              }
+              }
             />
 
             <CardContent>

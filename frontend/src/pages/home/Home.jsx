@@ -22,7 +22,13 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
     color: "#fff",
   },
 }));
-
+ const productQuanatity = (itemAPI) => {
+ const myProduct = selectedProducts.find((itemUser) => {
+  return itemUser.id === itemAPI.id
+}
+)
+return myProduct.quantity
+  }
   console.log(data);
 
   if (isLoading) {
@@ -77,7 +83,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
                 <Add fontSize="small"/>
               </IconButton>
 
-              <StyledBadge badgeContent={selectedProducts[index].quantity} color="primary" />
+              <StyledBadge badgeContent={productQuanatity(item)} color="primary" />
 
               <IconButton color="primary"
                 sx={{ color: "#1976d2", mr: "10px" }}

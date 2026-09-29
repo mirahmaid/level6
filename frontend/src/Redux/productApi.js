@@ -7,7 +7,7 @@ export const productApi = createApi({
   reducerPath: "productApi",
 
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000/",
+    baseUrl: "https://level6-wbsr.onrender.com/",
   }),
 
   endpoints: (builder) => ({
@@ -21,7 +21,7 @@ export const oneproductApi = createApi({
   reducerPath: "oneproductApi",
 
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000/",
+    baseUrl: "https://level6-wbsr.onrender.com/",
   }),
 
   endpoints: (build) => ({
